@@ -80,3 +80,111 @@ str     r1, [r0, #GPIOA_MODER]
 git clone https://github.com/yourusername/arm-assembly-blink
 cd arm-assembly-blink
 ```
+
+## 2. Install Prerequisites
+
+### Ubuntu/Debian
+
+```bash
+sudo apt update
+sudo apt install gcc-arm-none-eabi make stlink-tools
+```
+
+### macOS
+
+```bash
+brew install gcc-arm-embedded make stlink
+```
+
+### Windows
+
+Download and install:
+
+- **GNU ARM Embedded Toolchain**
+- **GNU Make for Windows**
+- **ST-Link USB Driver**
+
+## 3. Build and Flash
+
+Connect your **Nucleo board** via USB, then run:
+
+```bash
+make clean
+make
+make flash
+```
+
+If everything is set up correctly, the **green LED (LD2)** on your Nucleo board will start blinking!
+
+---
+
+# Troubleshooting
+
+| Problem | Solution |
+|--------|---------|
+| `make: command not found` | Install **GNU Make** (see above) |
+| `st-flash: command not found` | Install **ST-Link tools** |
+| Flashing fails | Check USB connection; run `st-info --probe` |
+| LED doesn't blink | Verify your board uses **PA5** for the LED (check user manual) |
+| Wrong LED pin | Some boards use different pins; modify `blink.s` accordingly |
+
+---
+
+# 📊 Challenges and Learnings
+
+## Challenge 1: Understanding the Memory Map
+
+Initially, I was confused about how peripherals were addressed. After studying the **Reference Manual**, I realized that all peripherals are mapped to specific memory ranges, and manipulating these addresses directly controls the hardware.
+
+## Challenge 2: Bit Manipulation in Assembly
+
+ARM assembly doesn't have high-level bit operations. I had to learn to use:
+
+- `AND`
+- `ORR`
+- `BIC`
+
+instructions carefully to modify specific bits without affecting others.
+
+## Challenge 3: Linker Scripts
+
+Creating the linker script taught me about:
+
+- Memory sections
+- **VMA vs LMA**
+- How the startup code initializes data
+
+This was crucial for understanding the complete boot process.
+
+---
+
+# 🔬 Future Improvements
+
+- Add **UART output** to print `"LED On/Off"` messages  
+- Implement **timer-based delays (SysTick)** instead of busy loops  
+- Add **external button interrupt** to control blinking speed  
+- Port to other STM32 families (**F103, L4**)
+
+---
+
+# 📚 References
+
+- STM32F446RE Reference Manual  
+- ARM Cortex-M4 Generic User Guide  
+- Bare Metal Programming Guide  
+
+---
+
+# 📝 License
+
+This project is open source under the **MIT License** – see the `LICENSE` file for details.
+
+---
+
+# 👨‍💻 Author
+
+**Jasper John Paitan**
+
+GitHub: `@jasper-0918`  
+LinkedIn: [LinkedIn Profile](https://www.linkedin.com/in/jasper-john-paitan-11641337b)  
+Email: jasperjohn.paitan@lsu.edu.ph
