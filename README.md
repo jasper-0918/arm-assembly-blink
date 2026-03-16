@@ -34,6 +34,7 @@ This project was created to:
 
 ## 📁 Project Structure
 arm-assembly-blink/
+
 ├── blink.s # Main assembly source (fully commented)
 
 ├── STM32F446RE.ld # Linker script defining memory layout
