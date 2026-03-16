@@ -71,4 +71,4 @@ ldr     r1, [r0, #GPIOA_MODER]
 bic     r1, r1, #(3 << 10)   @ Clear bits 10-11
 orr     r1, r1, #(1 << 10)    @ Set to output mode
 str     r1, [r0, #GPIOA_MODER]
-
+```
